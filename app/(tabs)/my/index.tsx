@@ -3,10 +3,10 @@ import {
     Text
 } from 'react-native';
 
-export default function HomeScreen() {
+export default function MyScreen() {
     return (
         <SafeAreaView>
-            <Text>This is Home</Text>
+            <Text>내정보 스크린</Text>
         </SafeAreaView>
     );
 }
