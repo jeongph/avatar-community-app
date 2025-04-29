@@ -8,7 +8,7 @@ const mockData = [
         userId: 1,
         title: "Mock 게시글 제목",
         description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
-        createdAt: "",
+        createdAt: "2025-04-29",
         author: {
             id: 1,
             nickname: "임시 닉네임",
@@ -26,7 +26,7 @@ const mockData = [
         userId: 1,
         title: "Mock 게시글 제목",
         description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
-        createdAt: "",
+        createdAt: "2025-04-27",
         author: {
             id: 1,
             nickname: "임시 닉네임",
