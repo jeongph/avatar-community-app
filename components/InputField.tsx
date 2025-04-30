@@ -5,19 +5,21 @@ import {colors} from "@/constants";
 interface InputFieldProps extends TextInputProps {
     label?: string,
     variant?: "filled" | "standard" | "outlined",
+    errorMessage?: string
 }
 
-function InputField({label, variant = "filled", ...props}: InputFieldProps) {
+function InputField({label, variant = "filled", errorMessage, ...props}: InputFieldProps) {
     return (
         <View>
             {label && <Text style={styles.label}>{label}</Text>}
-            <View style={[styles.container, styles[variant]]}>
+            <View style={[styles.container, styles[variant], Boolean(errorMessage) && {borderColor: colors.RED_500}]}>
                 <TextInput
                     placeholderTextColor={colors.GRAY_500}
                     style={styles.input}
                     {...props}
                 />
             </View>
+            {Boolean(errorMessage) && <Text style={styles.errorMessage}>{errorMessage}</Text>}
         </View>
     );
 }
@@ -46,6 +48,12 @@ const styles = {
         padding: 0,
         flex: 1,
     },
+    errorMessage: {
+        fontSize: 12,
+        marginTop: 5,
+        color: colors.RED_500,
+    },
+
 }
 
 export default InputField;

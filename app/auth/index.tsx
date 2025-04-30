@@ -1,4 +1,4 @@
-import {Image, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {Image, SafeAreaView, StyleSheet, View} from "react-native";
 import CustomButton from "@/components/CustomButton";
 import {Link, router} from "expo-router";
 
@@ -7,7 +7,7 @@ export default function AuthScreen() {
         <SafeAreaView style={styles.container}>
             <View style={styles.imageContainer}>
                 <Image
-                    source={require("@/assets/images/logo.png")}
+                    source={require("@/assets/images/logo-4x.png")}
                     style={styles.logo}
                 />
             </View>
@@ -35,8 +35,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logo: {
-        width: 112,
-        height: 112,
+        width: 224,
+        height: 224,
+        // flex: 1,
+        // resizeMode: 'cover', // or 'stretch'
     },
     signupText: {
         textAlign: "center",
