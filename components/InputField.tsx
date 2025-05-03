@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ForwardedRef, forwardRef} from "react";
 import {Text, TextInput, TextInputProps, View} from "react-native";
 import {colors} from "@/constants";
 
@@ -8,14 +8,23 @@ interface InputFieldProps extends TextInputProps {
     errorMessage?: string
 }
 
-function InputField({label, variant = "filled", errorMessage, ...props}: InputFieldProps) {
+function InputField({
+                        label,
+                        variant = "filled",
+                        errorMessage,
+                        ...props
+                    }: InputFieldProps, ref: ForwardedRef<TextInput>) {
     return (
         <View>
             {label && <Text style={styles.label}>{label}</Text>}
             <View style={[styles.container, styles[variant], Boolean(errorMessage) && {borderColor: colors.RED_500}]}>
                 <TextInput
+                    ref={ref}
                     placeholderTextColor={colors.GRAY_500}
                     style={styles.input}
+                    autoCapitalize={"none"}
+                    spellCheck={false}
+                    autoCorrect={false}
                     {...props}
                 />
             </View>
@@ -56,4 +65,4 @@ const styles = {
 
 }
 
-export default InputField;
+export default forwardRef(InputField);
