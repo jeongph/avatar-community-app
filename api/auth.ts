@@ -8,6 +8,7 @@ type RequestUser = {
 }
 
 async function postSignup(body: RequestUser): Promise<void> {
+    console.log("request body", body, "")
     const {data} = await axiosInstance.post("/auth/signup", body)
 
     return data; // const data -> data.data == const {data} -> data
