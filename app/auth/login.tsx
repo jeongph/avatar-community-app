@@ -3,6 +3,7 @@ import FixedBottomCTA from "@/components/FixedBottomCTA";
 import {FormProvider, useForm} from "react-hook-form";
 import EmailInput from "@/components/EmailInput";
 import PasswordInput from "@/components/PasswordInput";
+import useAuth from "@/hooks/queries/useAuth";
 
 type FormValues = {
     email: string;
@@ -10,6 +11,7 @@ type FormValues = {
 }
 
 export default function LoginScreen() {
+    const {loginMutation} = useAuth();
     const loginForm = useForm<FormValues>({
         defaultValues: {
             email: "",
@@ -18,7 +20,10 @@ export default function LoginScreen() {
     });
 
     const onsubmit = (formValues: FormValues) => {
-        console.log("formValues", formValues);
+        // console.log("formValues", formValues);
+
+        const {email, password} = formValues;
+        loginMutation.mutate({email, password})
     }
 
     return (
