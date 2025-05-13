@@ -15,6 +15,7 @@ function useGetMe() {
 
     useEffect(() => {
         if (isError) {
+            console.log("error")
             removeHeader("Authorization")
             deleteSecureStore("accessToken")
         }
@@ -24,11 +25,14 @@ function useGetMe() {
 }
 
 function useLogin() {
+    console.log("--useLogin function in")
     return useMutation({
         mutationFn: postLogin,
         onSuccess: async ({accessToken}) => {
             setHeader("Authorization", `Bearer ${accessToken}`);
             await saveSecureStore("accessToken", accessToken);
+            console.log("accessToken: ", accessToken)
+
             queryClient.fetchQuery({queryKey: ["auth", "getMe"]})
             router.replace("/");
         },
@@ -57,7 +61,7 @@ function useAuth() {
     const signupMutation = useSignup();
 
     return {
-        data: {
+        auth: {
             id: data?.id || "",
         },
         loginMutation,

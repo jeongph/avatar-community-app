@@ -21,6 +21,7 @@ async function postLogin(body: RequestUser): Promise<{ accessToken: string }> {
 }
 
 async function getMe(): Promise<Profile> {
+    console.log("access token: ")
     const accessToken = await getSecureStore("accessToken")
     const {data} = await axiosInstance.get("/auth/me", {
         headers: {

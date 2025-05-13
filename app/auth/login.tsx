@@ -20,7 +20,7 @@ export default function LoginScreen() {
     });
 
     const onsubmit = (formValues: FormValues) => {
-        // console.log("formValues", formValues);
+        console.log("Login Screen onsubmit:", formValues);
 
         const {email, password} = formValues;
         loginMutation.mutate({email, password})

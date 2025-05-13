@@ -6,6 +6,7 @@ import {useEffect} from 'react';
 import 'react-native-reanimated';
 import {QueryClientProvider} from "@tanstack/react-query";
 import queryClient from "@/api/queryClient";
+import useAuth from "@/hooks/queries/useAuth";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -33,6 +34,9 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
+    const {auth} = useAuth();
+    console.log("auth", auth);
+
     return (
         <Stack>
             <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
