@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 import {QueryClientProvider} from "@tanstack/react-query";
 import queryClient from "@/api/queryClient";
 import useAuth from "@/hooks/queries/useAuth";
+import Toast from "react-native-toast-message";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,18 +30,27 @@ export default function RootLayout() {
     return (
         <QueryClientProvider client={queryClient}>
             <RootNavigator/>
+            <Toast/>
         </QueryClientProvider>
     );
 }
 
 function RootNavigator() {
     const {auth} = useAuth();
-    console.log("auth", auth);
+    // console.log("auth", auth);
+
+    useEffect(() => {
+        auth.id && Toast.show({
+            type: "success",
+            text1: `${auth.nickname ?? "회원"}님 환영합니다!`,
+        });
+    }, [auth.id]);
 
     return (
         <Stack>
             <Stack.Screen name="(tabs)" options={{headerShown: false}}/>
             <Stack.Screen name="auth" options={{headerShown: false}}/>
+            <Stack.Screen name="post" options={{headerShown: false}}/>
             <Stack.Screen name="+not-found"/>
         </Stack>
     );

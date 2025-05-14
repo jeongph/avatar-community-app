@@ -17,7 +17,13 @@ function InputField({
     return (
         <View>
             {label && <Text style={styles.label}>{label}</Text>}
-            <View style={[styles.container, styles[variant], Boolean(errorMessage) && {borderColor: colors.RED_500}]}>
+            <View
+                style={[
+                    styles.container,
+                    styles[variant],
+                    Boolean(errorMessage) && {borderColor: colors.RED_500},
+                    props.multiline && styles.multiline,
+                ]}>
                 <TextInput
                     ref={ref}
                     placeholderTextColor={colors.GRAY_500}
@@ -62,7 +68,11 @@ const styles = {
         marginTop: 5,
         color: colors.RED_500,
     },
-
+    multiline: {
+        alignItems: "flex-start",
+        paddingVertical: 10,
+        height: 500,
+    },
 }
 
 export default forwardRef(InputField);
