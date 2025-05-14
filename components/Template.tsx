@@ -5,7 +5,7 @@ interface TemplateProps {
 
 }
 
-function Template() {
+function Template({}: TemplateProps) {
     return (
         <View>
         </View>

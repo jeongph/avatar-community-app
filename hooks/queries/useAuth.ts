@@ -15,7 +15,7 @@ function useGetMe() {
 
     useEffect(() => {
         if (isError) {
-            console.log("error")
+            // console.log("error")
             removeHeader("Authorization")
             deleteSecureStore("accessToken")
         }
@@ -60,12 +60,19 @@ function useAuth() {
     const loginMutation = useLogin();
     const signupMutation = useSignup();
 
+    const logout = () => {
+        removeHeader("Authorization")
+        deleteSecureStore("accessToken")
+        queryClient.resetQueries({queryKey: ["auth"]})
+    };
+
     return {
         auth: {
             id: data?.id || "",
         },
         loginMutation,
-        signupMutation
+        signupMutation,
+        logout
     };
 }
 
