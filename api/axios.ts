@@ -2,8 +2,7 @@ import axios from "axios";
 import {Platform} from "react-native";
 
 const baseUrls = {
-    android: "https://192.168.0.29:8080", // ???
-    // ios: "https://192.168.0.29:8080",
+    android: "http://192.168.0.29:8080",
     ios: "http://localhost:8080/",
 };
 
