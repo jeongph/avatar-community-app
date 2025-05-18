@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {getMe, postLogin, postSignup} from "@/api/auth";
-import {deleteSecureStore, saveSecureStore} from "@/utils/secureStore";
+import {deleteSecureStore, getSecureStore, saveSecureStore} from "@/utils/secureStore";
 import {router} from "expo-router";
 import {removeHeader, setHeader} from "@/utils/header";
 import queryClient from "@/api/queryClient";
@@ -8,10 +8,19 @@ import {useEffect} from "react";
 
 function useGetMe() {
     // 가져올땐 useQuery, 보낼땐 useMutation (아래)
-    const {data, isError} = useQuery({
+    const {data, isError, isSuccess} = useQuery({
         queryFn: getMe,
         queryKey: ["auth", "getMe"] // queryKey 를 사용해서 login hook 에서 정보를 가져오는 쿼리를 실행시킬 수 있음
     });
+
+    useEffect(() => {
+        (async () => {
+            if (isSuccess) {
+                const accessToken = await getSecureStore("accessToken");
+                setHeader("Authorization", `Bearer ${accessToken}`);
+            }
+        })();
+    }, [isSuccess]);
 
     useEffect(() => {
         if (isError) {
