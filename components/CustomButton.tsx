@@ -5,7 +5,7 @@ import {colors} from "@/constants";
 interface CustomButtonProps extends PressableProps {
     label: string;
     size?: "medium" | "large";
-    variant?: "filled";
+    variant?: "standard" | "filled";
 }
 
 function CustomButton({
@@ -39,6 +39,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "bold",
         color: colors.WHITE
+    },
+    standard: {
+        fontSize: 14,
+        fontWeight: "bold",
+        color: colors.ORANGE_600,
     },
     pressed: {
         opacity: 0.8,
