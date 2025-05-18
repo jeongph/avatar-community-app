@@ -1,7 +1,8 @@
 import {FormProvider, useForm} from "react-hook-form";
 import TitleInput from "@/components/TitleInput";
 import DescriptionInput from "@/components/DescriptionInput";
-import {ScrollView, StyleSheet} from "react-native";
+import {StyleSheet} from "react-native";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 type FormValues = {
     title: string;
@@ -17,15 +18,12 @@ export default function PostWriteScreen() {
     });
 
     return (
-        <ScrollView style={styles.container}>
-            <FormProvider {...postForm}>
+        <FormProvider {...postForm}>
+            <KeyboardAwareScrollView contentContainerStyle={styles.container}>
                 <TitleInput/>
                 <DescriptionInput/>
-                <DescriptionInput/>
-                <DescriptionInput/>
-                <DescriptionInput/>
-            </FormProvider>
-        </ScrollView>
+            </KeyboardAwareScrollView>
+        </FormProvider>
     );
 }
 
