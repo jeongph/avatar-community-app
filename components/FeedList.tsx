@@ -2,6 +2,8 @@ import {FlatList, StyleSheet} from "react-native";
 import FeedItem from "@/components/FeedItem";
 import {colors} from "@/constants";
 import useGetInfinitePosts from "@/hooks/queries/useGetInfinitePosts";
+import {useRef, useState} from "react";
+import {useScrollToTop} from "@react-navigation/native";
 
 // const mockData = [
 //     {
@@ -43,14 +45,36 @@ import useGetInfinitePosts from "@/hooks/queries/useGetInfinitePosts";
 // ]
 
 function FeedList() {
-    const {data: posts} = useGetInfinitePosts() // posts 로 객체명을 바꿔줌
+    const {data: posts, fetchNextPage, hasNextPage, isFetchingNextPage, refetch} = useGetInfinitePosts() // posts 로 객체명을 바꿔줌
+
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    const ref = useRef<FlatList | null>(null);
+    useScrollToTop(ref);
+
+    const handleRefresh = async () => {
+        setIsRefreshing(true);
+        await refetch();
+        setIsRefreshing(false);
+    }
+
+    const handleEndReached = () => { // 페이지네이션의 다음 게시글을 조회해서 가져옴
+        if (hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+        }
+    }
 
     return (
         <FlatList
+            ref={ref}
             data={posts?.pages.flat()}
             renderItem={({item}) => <FeedItem post={item}/>}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={styles.contentContainer}
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5} // 화면이 맨아래까지 완전히 닿지 않고 절반정도에 미리 페이지 조회
+            refreshing={isRefreshing}
+            onRefresh={handleRefresh}
         />
     );
 }
