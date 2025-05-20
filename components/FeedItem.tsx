@@ -5,13 +5,17 @@ import {MaterialCommunityIcons, Octicons} from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {Post} from "@/types";
 import Profile from "@/components/Profile";
+import useAuth from "@/hooks/queries/useAuth";
 
 interface FeedItemProps {
     post: Post;
 }
 
 function FeedItem({post}: FeedItemProps) {
-    const isLiked = true;
+    // const isLiked = true;
+    const {auth} = useAuth();
+    const likeUsers = post.likes?.map((like) => Number(like.userId));
+    const isLiked = likeUsers?.includes(Number(auth.id));
 
     return (
         <>
@@ -34,7 +38,9 @@ function FeedItem({post}: FeedItemProps) {
                             size={16}
                             color={isLiked ? colors.ORANGE_600 : colors.BLACK}
                         />
-                        <Text style={isLiked ? styles.activeMenuText : styles.menuText}>1</Text>
+                        <Text style={isLiked ? styles.activeMenuText : styles.menuText}>
+                            {post.likes.length || "좋아요"}
+                        </Text>
                     </Pressable>
                     <Pressable style={styles.menu}>
                         <MaterialCommunityIcons
@@ -42,7 +48,9 @@ function FeedItem({post}: FeedItemProps) {
                             size={16}
                             color={colors.BLACK}
                         />
-                        <Text style={styles.menuText}>1</Text>
+                        <Text style={styles.menuText}>
+                            {post.commentCount || "댓글"}
+                        </Text>
                     </Pressable>
                     <Pressable style={styles.menu}>
                         <Ionicons
@@ -50,7 +58,9 @@ function FeedItem({post}: FeedItemProps) {
                             size={16}
                             color={colors.BLACK}
                         />
-                        <Text style={styles.menuText}>1</Text>
+                        <Text style={styles.menuText}>
+
+                        </Text>
                     </Pressable>
                 </View>
             </View>
