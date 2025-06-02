@@ -5,44 +5,44 @@ import useGetInfinitePosts from "@/hooks/queries/useGetInfinitePosts";
 import {useRef, useState} from "react";
 import {useScrollToTop} from "@react-navigation/native";
 
-// const mockData = [
-//     {
-//         id: 1,
-//         userId: 1,
-//         title: "Mock 게시글 제목",
-//         description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
-//         createdAt: "2025-04-29",
-//         author: {
-//             id: 1,
-//             nickname: "임시 닉네임",
-//             imageUri: ""
-//         },
-//         imageUris: [],
-//         likes: [],
-//         hasVote: false,
-//         voteCount: 1,
-//         commentCount: 1,
-//         viewCount: 1,
-//     },
-//     {
-//         id: 2,
-//         userId: 1,
-//         title: "Mock 게시글 제목",
-//         description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
-//         createdAt: "2025-04-27",
-//         author: {
-//             id: 1,
-//             nickname: "임시 닉네임",
-//             imageUri: ""
-//         },
-//         imageUris: [],
-//         likes: [],
-//         hasVote: false,
-//         voteCount: 1,
-//         commentCount: 1,
-//         viewCount: 1,
-//     }
-// ]
+const mockData = [
+    {
+        id: 1,
+        userId: 1,
+        title: "Mock 게시글 제목",
+        description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
+        createdAt: "2025-04-29",
+        author: {
+            id: 1,
+            nickname: "임시 닉네임",
+            imageUri: ""
+        },
+        imageUris: [],
+        likes: [],
+        hasVote: false,
+        voteCount: 1,
+        commentCount: 1,
+        viewCount: 1,
+    },
+    {
+        id: 2,
+        userId: 1,
+        title: "Mock 게시글 제목",
+        description: "아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.아주 긴~ 게시글.",
+        createdAt: "2025-04-27",
+        author: {
+            id: 1,
+            nickname: "임시 닉네임",
+            imageUri: ""
+        },
+        imageUris: [],
+        likes: [],
+        hasVote: false,
+        voteCount: 1,
+        commentCount: 1,
+        viewCount: 1,
+    }
+]
 
 function FeedList() {
     const {data: posts, fetchNextPage, hasNextPage, isFetchingNextPage, refetch} = useGetInfinitePosts() // posts 로 객체명을 바꿔줌
@@ -67,7 +67,8 @@ function FeedList() {
     return (
         <FlatList
             ref={ref}
-            data={posts?.pages.flat()}
+            // data={posts?.pages.flat()}
+            data={mockData}
             renderItem={({item}) => <FeedItem post={item}/>}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={styles.contentContainer}
