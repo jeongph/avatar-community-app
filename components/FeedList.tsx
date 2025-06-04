@@ -45,7 +45,12 @@ const mockData = [
 ]
 
 function FeedList() {
-    const {data: posts, fetchNextPage, hasNextPage, isFetchingNextPage, refetch} = useGetInfinitePosts() // posts 로 객체명을 바꿔줌
+    const {data: posts, fetchNextPage, hasNextPage, isFetchingNextPage, refetch} = useGetInfinitePosts() // data -> posts 로 객체명을 바꿔줌
+    console.log("===============================================\n")
+    console.log('post:', posts);
+    console.log("===============================================\n")
+    console.log('pages:', posts?.pages);
+    console.log("===============================================\n")
 
     const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -64,11 +69,14 @@ function FeedList() {
         }
     }
 
+    const feedItems = posts?.pages.flatMap(page => page.content);
+    // console.log('feedItems:', feedItems);
+
     return (
         <FlatList
             ref={ref}
             // data={posts?.pages.flat()}
-            data={mockData}
+            data={feedItems}
             renderItem={({item}) => <FeedItem post={item}/>}
             keyExtractor={(item) => String(item.id)}
             contentContainerStyle={styles.contentContainer}
