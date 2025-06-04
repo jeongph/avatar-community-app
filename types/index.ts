@@ -83,6 +83,14 @@ interface Post {
     comments?: PostComment[];
 }
 
+interface PagePost {
+    content: Post[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    last: boolean;
+}
+
 export type {
     Profile,
     PostVote,
@@ -90,7 +98,7 @@ export type {
     CreatePostDto,
     CreateCommentDto,
     CreateVoteDto,
-    Post,
+    Post, PagePost,
     Comment,
     ImageUri,
     VoteOption,
